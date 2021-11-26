@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto implements Serializable {
-    private static final long serialVersionUID = -2409996223780291512L;
+    private static final long serialVersionUID = 8697863216113231975L;
 
     private String login;
     private String password;
