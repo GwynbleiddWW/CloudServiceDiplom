@@ -3,9 +3,9 @@ package service.implement;
 import dto.FileDto;
 import exception.CloudServiceDiplomNotFoundException;
 import exception.CloudServiceFileException;
-import lombok.AllArgsConstructor;
 import model.Condition;
 import model.File;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 import static java.lang.String.format;
 import static security.JwtProvider.BEARER_LENGTH;
 
-@AllArgsConstructor
 @Service
 public class UploadedFileServiceImpl implements UploadedFileService {
 
@@ -36,6 +35,14 @@ public class UploadedFileServiceImpl implements UploadedFileService {
     private final JwtProvider jwtProvider;
     private final UploadedFileUserRepository repository;
     private final UploadedFileRepository uploadedFileRepository;
+
+    public UploadedFileServiceImpl(JwtProvider jwtProvider, UploadedFileUserRepository repository, UploadedFileRepository uploadedFileRepository) {
+        this.jwtProvider = jwtProvider;
+        this.repository = repository;
+        this.uploadedFileRepository = uploadedFileRepository;
+    }
+
+    @Autowired
 
     @PostConstruct
     private void init() {
