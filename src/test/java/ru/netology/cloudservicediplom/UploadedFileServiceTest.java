@@ -1,24 +1,24 @@
 package ru.netology.cloudservicediplom;
 
-import exception.CloudServiceDiplomNotFoundException;
-import exception.CloudServiceFileException;
-import model.Condition;
-import model.File;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import repository.UploadedFileRepository;
-import repository.UploadedFileUserRepository;
-import security.JwtProvider;
-import service.UploadedFileService;
-import service.implement.UploadedFileServiceImpl;
-
+import ru.netology.cloudservicediplom.exception.CloudServiceDiplomNotFoundException;
+import ru.netology.cloudservicediplom.exception.CloudServiceFileException;
+import ru.netology.cloudservicediplom.model.Condition;
+import ru.netology.cloudservicediplom.model.File;
+import ru.netology.cloudservicediplom.repository.UploadedFileRepository;
+import ru.netology.cloudservicediplom.repository.UploadedFileUserRepository;
+import ru.netology.cloudservicediplom.security.JwtProvider;
+import ru.netology.cloudservicediplom.service.UploadedFileService;
+import ru.netology.cloudservicediplom.service.implement.UploadedFileServiceImpl;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static security.JwtProvider.BEARER_LENGTH;
+import static ru.netology.cloudservicediplom.security.JwtProvider.BEARER_LENGTH;
 
 public class UploadedFileServiceTest {
 

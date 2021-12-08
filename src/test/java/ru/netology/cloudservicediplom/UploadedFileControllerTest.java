@@ -1,6 +1,6 @@
 package ru.netology.cloudservicediplom;
 
-import dto.FileDto;
+
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +11,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import restController.UploadedFileController;
-import security.JwtProvider;
-import service.UploadedFileService;
+
+import ru.netology.cloudservicediplom.dto.FileDto;
+import ru.netology.cloudservicediplom.restController.UploadedFileController;
+import ru.netology.cloudservicediplom.security.JwtProvider;
+import ru.netology.cloudservicediplom.service.UploadedFileService;
+
 
 import javax.annotation.Resource;
 
@@ -43,22 +46,22 @@ public class UploadedFileControllerTest {
 
     @Test
     @SneakyThrows
-    public void whenGetFileThenStatusUnauthorized() {
+    public void whenGetFileThenStatusOk() {
         var file = new ClassPathResource("files\\testFile.txt").getFile();
         when(service.getFile(token, fileName)).thenReturn(file);
 
         mockMvc.perform(get("/file").header("auth-token", token).param("filename", fileName))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isOk());
     }
 
     @Test
     @SneakyThrows
-    public void whenGetListThenStatusUnauthorized() {
+    public void whenGetListThenStatusOk() {
         var list = List.of(
                 FileDto.builder().filename("name").size(100L).build()
         );
         when(service.getUploadedFile(token, 1)).thenReturn(list);
         mockMvc.perform(get("/list").header("auth-token", token).param("limit", "1"))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isOk());
     }
 }
