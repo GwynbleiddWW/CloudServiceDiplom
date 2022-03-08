@@ -1,8 +1,8 @@
 package ru.netology.cloudservicediplom;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.netology.cloudservicediplom.model.Role;
 import ru.netology.cloudservicediplom.model.User;
@@ -13,33 +13,21 @@ import java.util.List;
 
 
 @Component
-public class DataLoader implements CommandLineRunner /*ApplicationRunner*/ {
+public class DataLoader implements CommandLineRunner {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DataLoader(UserRepository userRepository) {
+    public DataLoader(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     List<Role> roleList = new ArrayList<>();
-   /* public void run(ApplicationArguments args) {
-        userRepository.save(User.builder()
-                .username("Man")
-                .password("1234")
-                .email("@mail")
-                .build());
-    }
-   public void run(ApplicationArguments args) {
-       userRepository.save(new User("jojo", "lala", "lala", "@mail", "1234", roleList));
-   }*/
-
-    //@PostConstruct - ещё вариант
-
     @Override
-    public void run(String... args) throws Exception {
-        userRepository.save(new User("lala", "lala", "lala", "lala", "lala", roleList));
+    public void run(String... args) {
+        userRepository.save(new User("lala", "lala", "lala", "lala", passwordEncoder.encode("lala"), roleList));
     }
-
 
 }
