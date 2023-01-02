@@ -1,6 +1,7 @@
 package ru.netology.cloudservicediplom.security;
 
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ru.netology.cloudservicediplom.model.Role;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public final class JwtUserFactory {
 
-    public static JwtUser create(User user) {
+    public static JwtUser create(@NotNull User user) {
         return new JwtUser(
                 user.getId(),
                 user.getUsername(),
@@ -22,7 +23,7 @@ public final class JwtUserFactory {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getUserCondition().equals(UserCondition.ACTIVE),
+                user.equals(user),
                 user.getUpdated(),
                 mapToGrantedAuthorities(new ArrayList<>(user.getRoles()))
         );

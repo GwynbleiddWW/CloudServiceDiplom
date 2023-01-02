@@ -16,7 +16,7 @@ public class UserController {
 
     private final AuthService authService;
 
-    @PostMapping("login")
+    @PostMapping(path = "login")
     public TokenDto login(@RequestBody AuthDto authDto) {
         var token = new TokenDto();
         token.setValue(authService.getToken(authDto));

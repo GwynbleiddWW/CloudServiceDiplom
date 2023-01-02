@@ -22,8 +22,4 @@ public class BaseEntity {
     @LastModifiedDate
     @Column
     private Date updated;
-
-    @Enumerated(EnumType.STRING)
-    @Column
-    private UserCondition userCondition;
 }

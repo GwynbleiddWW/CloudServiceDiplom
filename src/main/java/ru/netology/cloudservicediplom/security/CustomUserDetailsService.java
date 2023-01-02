@@ -16,7 +16,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userService.findByLogin(username);
-        var jwtUser = JwtUserFactory.create(user);
-        return jwtUser;
+        return JwtUserFactory.create(user);
     }
 }
